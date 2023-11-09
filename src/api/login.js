@@ -1,8 +1,6 @@
-import instance from './index';
+import axios from 'axios';
+import instance from '../api/index';
 
-export default () => instance.get('users');
-
-/* const getMovies = () => {return (instance.get('/discover/movie'))};
-const getMovieDetails = (movie_id) => {return (instance.get(`/movie/${movie_id}`))};
-
-export { getMovies, getMovieDetails }; */
+export default async function getLoginUsers() {
+  return await instance.get('users');
+}

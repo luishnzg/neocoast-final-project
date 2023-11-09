@@ -5,9 +5,12 @@ import login from '../../api/login';
 import './index.scss';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import ProductList from 'Components/productList/productList';
+import CategoryMenu from 'Components/categories/categories';
 
 const Home = () => {
   const [userActive, setUserActive] = useState();
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const initHome = async () => {
     const { data: userActive } = await login();
@@ -18,7 +21,10 @@ const Home = () => {
   }, []);
   return (
     <div className="home">
-      <h1>Welcome to the Home Page of the React Bootcamp App</h1>
+      <CategoryMenu
+        onSelectCategory={(category) => setSelectedCategory(category)}
+      />
+      <ProductList selectedCategory={selectedCategory} />
     </div>
   );
 };

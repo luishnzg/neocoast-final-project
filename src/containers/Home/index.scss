@@ -1,10 +1,15 @@
 .home {
-  align-items: center;
+  /* align-items: center;
   display: flex;
   flex: 1;
-  flex-direction: column;
+  flex-direction: column; */
   font-family: monospace;
   justify-content: center;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  
+  background-color: rgb(250, 244, 235);
+  height: 100vh;
 
   & h1 {
     font-size: 30px;

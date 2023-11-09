@@ -1,0 +1,104 @@
+
+.productDetail__parentContainer {
+    background-color: rgb(250, 244, 235);
+    height: 100vh;
+}
+.productDetail__backButton {
+    background-color: rgb(250, 244, 235);
+    border: none;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 20px;
+    cursor: pointer;
+}
+.productDetail__mainContainer {
+    margin: 0 auto;
+    width: 100%;
+    padding: 50px;
+   /*  height: 500px;
+    width: 70%; */
+}
+
+.productDetail__productContainer {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    margin: 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px;
+    background-color: white;
+    height: 500px;
+    width: 59%;
+}
+.productDetail__infoContainer {
+
+}
+.productDetail__imageContainer {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.productDetail__image {
+   /*  width: 100%; */
+    max-width: 320px;
+    max-height: 400px;
+}
+.productDetail__infoContainer {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.productDetail__titleContainer {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.productDetail__categoryRatingContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productDetail__category {
+    background-color: #286150;
+    color: white;
+    font-weight: 700;
+    padding: 20px;
+    width: 55%;
+    text-transform: capitalize;
+    text-align: center;
+}
+.productDetail__ratingStar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+.productDetail__rate {
+   font-weight: 700;
+}
+.productDetail__start {
+    width: 5%;
+    margin-right: 5px;
+}
+
+.productDetail__descriptionPrice {
+}
+
+.productDetail__description {
+    font-size: 15px;
+}
+
+.productDetail__price {
+    font-weight: 700;
+    font-size: 30px;
+    float: right;
+    margin-top: 20px;
+}
