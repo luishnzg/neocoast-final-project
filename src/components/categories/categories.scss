@@ -9,6 +9,8 @@
   }
 .categoryList__listItem {
     width: 80%;
+    border: none;
+    background-color: white;
     border-bottom: 0.5px solid lightgrey;
     margin: 20px auto;
     text-align: center;
@@ -16,9 +18,10 @@
     cursor: pointer;
     font-weight: 700;
     text-transform: capitalize;
+    display: block;
 }
 .categoryList__listItem:hover {
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     border: 0.5px solid lightgrey;
 
 }

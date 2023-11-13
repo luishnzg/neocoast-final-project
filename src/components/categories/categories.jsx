@@ -1,18 +1,21 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
+import Button from 'Components/button/button';
+import Loader from 'Components/loader/loader';
 import getCategory from '../../api/category';
-import '../categories/categories.scss';
+import './categories.scss';
 
 const CategoryMenu = ({ onSelectCategory }) => {
   const [categoryData, setCategoryData] = useState(null);
   const [error, setError] = useState(null);
-  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('All');
 
   const handleCategoryClick = (category) => {
     onSelectCategory(category === 'All' ? null : category);
     setActiveCategory(category);
   };
+  useEffect(() => {}, [activeCategory]);
   const getCategoryList = async () => {
     try {
       const getCategoryData = await getCategory();
@@ -22,7 +25,7 @@ const CategoryMenu = ({ onSelectCategory }) => {
       } else {
         setError('No se han recibido datos de las categorias.');
       }
-    } catch (error) {
+    } catch (errorApi) {
       console.log(error);
       setError(
         'Hubo un error al cargar los datos de las categorias.',
@@ -35,27 +38,29 @@ const CategoryMenu = ({ onSelectCategory }) => {
   return (
     <div className="category__parentContainer">
       <div className="categoryList__listContainer">
-        <div
-          className={`categoryList__listItem ${
-            activeCategory === 'All' ? 'active' : ''
-          }`}
-          onClick={() => handleCategoryClick('All')}>
-          All
-        </div>
-        {categoryData ? (
+        {categoryData && (
+          <Button
+            styling={`categoryList__listItem ${
+              activeCategory === 'All' ? 'active' : ''
+            }`}
+            onclick={() => handleCategoryClick('All')}
+            text="All"
+          />
+        )}
+        {categoryData &&
           categoryData.map((category, index) => (
-            <div
+            <Button
               key={index}
-              className={`categoryList__listItem ${
+              styling={`categoryList__listItem ${
                 activeCategory === category ? 'active' : ''
               }`}
-              onClick={() => handleCategoryClick(category)}>
-              {category}
-            </div>
-          ))
-        ) : (
+              onclick={() => handleCategoryClick(category)}
+              text={category}
+            />
+          ))}
+        {!categoryData && (
           <div>
-            <h1>Es una Prueba</h1>
+            <Loader />
           </div>
         )}
       </div>

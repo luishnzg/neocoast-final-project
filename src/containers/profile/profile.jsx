@@ -1,27 +1,25 @@
-import getUserInfo from '../../api/users';
 import React, { useEffect, useState } from 'react';
+import Loader from 'Components/loader/loader';
+import getUserInfo from '../../api/users';
+import './profile.scss';
 
-import '../profile/profile.scss';
 const Profile = () => {
   const [userId, setUserId] = useState();
   const [loggedView, setLoggedView] = useState('');
   const [error, setError] = useState('');
   const [userData, setUserData] = useState({});
-  const [userDataName, setUserDataName] = useState({});
-  const [userDataAddress, setUserDataAddress] = useState('');
   const getUser = async (id) => {
     try {
       const getUserData = await getUserInfo(id);
-      /*  console.log(getUserData.data); */
+      console.log('get user data', getUserData.data);
       if (getUserData) {
         setUserData(getUserData.data);
-        setUserDataName(getUserData.data.name);
-        setUserDataAddress(getUserData.data.address);
       } else {
         setError('No se ha recibido dato del usuario.');
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (errorApi) {
+      console.log(errorApi);
       setError('Hubo un error al cargar los datos del usuario.');
     }
   };
@@ -31,7 +29,6 @@ const Profile = () => {
     );
     if (!(userId === null)) {
       setLoggedView(true);
-      console.log('se ve bien');
     } else {
       setLoggedView(false);
       window.location.replace('/');
@@ -44,50 +41,53 @@ const Profile = () => {
   }, [loggedView, userId]);
   return (
     <div className="userData__parentContainer">
-      {loggedView ? (
+      {userData.name ? (
         <div className="userData__container">
           <h1 className="userData__title">User Profile</h1>
           <div>
-            <label>First Name</label>
-            <input value={userDataName.firstname} disabled />
+            <label htmlFor="name">First Name</label>
+            <input value={userData.name.firstname} disabled />
+            {console.log(
+              'userdata imprimido en el first name',
+              userData,
+            )}
           </div>
           <div>
-            <label>Last Name</label>
-            <input value={userDataName.lastname} disabled />
+            <label htmlFor="name">Last Name</label>
+            <input value={userData.name.lastname} disabled />
           </div>
           <div>
-            <label>User Name</label>
+            <label htmlFor="name">User Name</label>
             <input value={userData.username} disabled />
           </div>
           <div>
-            <label>E-mail</label>
+            <label htmlFor="name">E-mail</label>
             <input value={userData.email} disabled />
           </div>
           <div>
-            <label>Phone Number</label>
+            <label htmlFor="name">Phone Number</label>
             <input value={userData.phone} disabled />
           </div>
           <div>
-            <label>City</label>
-            <input value={userDataAddress.city} disabled />
+            <label htmlFor="name">City</label>
+            <input value={userData.address.city} disabled />
           </div>
           <div>
-            <label>Street</label>
-            <input value={userDataAddress.street} disabled />
+            <label htmlFor="name">Street</label>
+            <input value={userData.address.street} disabled />
           </div>
           <div>
-            <label>Street</label>
-            <input value={userDataAddress.number} disabled />
+            <label htmlFor="name">Street</label>
+            <input value={userData.address.number} disabled />
           </div>
           <div>
-            <label>Street</label>
-            <input value={userDataAddress.zipcode} disabled />
+            <label htmlFor="name">Street</label>
+            <input value={userData.address.zipcode} disabled />
           </div>
         </div>
       ) : (
         <div>
-          <h1>Prueba</h1>
-          <p>salio mal</p>
+          <Loader />
         </div>
       )}
     </div>

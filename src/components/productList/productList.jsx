@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import getProducts from '../../api/products';
-
 import './productList.scss';
 import { Link } from 'react-router-dom';
+import Loader from 'Components/loader/loader';
+import getProducts from '../../api/products';
+
 const ProductList = ({ selectedCategory }) => {
   const [productData, setProductData] = useState(null);
   const [error, setError] = useState(null);
@@ -23,7 +24,7 @@ const ProductList = ({ selectedCategory }) => {
       } else {
         setError('No se han recibido datos de los productos.');
       }
-    } catch (error) {
+    } catch (errorApi) {
       console.log(error);
       setError('Hubo un error al cargar los datos de los productos.');
     }
@@ -34,7 +35,7 @@ const ProductList = ({ selectedCategory }) => {
   return (
     <div className="parentContainer">
       <div className="productList__listContainer">
-        {productData ? (
+        {productData &&
           filteredProducts.map((product) => (
             <Link
               to={`/product/${product.id}`}
@@ -56,13 +57,13 @@ const ProductList = ({ selectedCategory }) => {
                 </p>
               </div>
             </Link>
-          ))
-        ) : (
-          <div>
-            <h1>Es una Prueba</h1>
-          </div>
-        )}
+          ))}
       </div>
+      {!productData && (
+        <div className="loaderParentContainer">
+          <Loader />
+        </div>
+      )}
     </div>
   );
 };

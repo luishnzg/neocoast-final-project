@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Button from 'Components/button/button';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './topbar.scss';
 
 const TopBar = () => {
@@ -40,35 +40,28 @@ const TopBar = () => {
         </div>
         {displayLoggedView ? (
           <div className="topBar__navBlocks">
-            <NavLink
-              to="/giftcart"
-              className={({ isActive, isPending }) =>
-                isPending ? 'pending' : isActive ? 'active' : ''
-              }>
+            <Link to="/giftcart" className="topBar__linkNav">
               Send Gift
-            </NavLink>
-            <img
-              className="top-bar__image"
-              src="https://i.ibb.co/GtL7Tvt/food-cart.png"
-              alt="cart"
-            />
-            <div>
-              <NavLink
-                to="/profile"
-                className={({ isActive, isPending }) =>
-                  isPending ? 'pending' : isActive ? 'active' : ''
-                }>
-                User Profile
-              </NavLink>
+            </Link>
+            {/*   <Link
+              to={`/usercart/${loggedUser.id}/0`}
+              className='topBar__linkNav'>
+              <img
+                className="top-bar__image"
+                src="https://i.ibb.co/GtL7Tvt/food-cart.png"
+                alt="cart"></img>
+            </Link>
+ */}
+            <Link
+              to={`/usercart/${loggedUser && loggedUser.id}/0`}
+              className="topBar__linkNav">
+              Cart
+            </Link>
 
-              <NavLink
-                to={`/usercart/${loggedUser.id}/0`}
-                className={({ isActive, isPending }) =>
-                  isPending ? 'pending' : isActive ? 'active' : ''
-                }>
-                Cart
-              </NavLink>
-            </div>
+            <Link to="/profile" className="topBar__linkNav">
+              Profile
+            </Link>
+
             <Button
               text="Log Out"
               styling="logout__button"

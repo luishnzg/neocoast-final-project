@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Loader from 'Components/loader/loader';
 import getProductDetail from '../../api/productDetail';
 
 import './product.scss';
-import Loader from 'Components/loader/loader';
 
 const Product = () => {
   const { id } = useParams();
@@ -23,7 +23,7 @@ const Product = () => {
       } else {
         setError('No se han recibido datos de los productos.');
       }
-    } catch (error) {
+    } catch (errorApi) {
       console.log(error);
       setError('Hubo un error al cargar los datos de los productos.');
     }

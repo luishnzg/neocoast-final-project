@@ -1,6 +1,5 @@
-import axios from 'axios';
-import instance from '../api/index';
+import instance from './index';
 
 export default async function getProductDetail(id) {
-  return await instance.get(`products/${id}`);
+  return instance.get(`products/${id}`);
 }

@@ -9,20 +9,18 @@ const InputComponent = ({
   forH,
   changeEvent,
   text,
-}) => {
-  return (
-    <div className={stylying}>
-      <label htmlFor={forH}>{text}</label>
-      <input
-        type={type}
-        id={id}
-        name={name}
-        value={value}
-        onChange={changeEvent}
-        required
-      />
-    </div>
-  );
-};
+}) => (
+  <div className={stylying}>
+    <label htmlFor={forH}>{text}</label>
+    <input
+      type={type}
+      id={id}
+      name={name}
+      value={value}
+      onChange={changeEvent}
+      required
+    />
+  </div>
+);
 
 export default InputComponent;

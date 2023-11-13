@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import getLoginUsers from '../../api/login';
 import Button from '../../components/button/button';
 import InputComponent from '../../components/input/input';
-import '../Login/login.scss';
+import './login.scss';
 
 const Login = () => {
   const [userData, setUserData] = useState(null);
@@ -19,7 +19,7 @@ const Login = () => {
       } else {
         setError('No se han recibido datos de usuarios.');
       }
-    } catch (error) {
+    } catch (errorApi) {
       console.log(error);
       setError('Hubo un error al cargar los datos de usuarios.');
     }

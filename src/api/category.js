@@ -1,6 +1,5 @@
-import axios from 'axios';
-import instance from '../api/index';
+import instance from './index';
 
 export default async function getCategory() {
-  return await instance.get('products/categories');
+  return instance.get('products/categories');
 }

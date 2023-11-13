@@ -38,7 +38,7 @@ const Cart = () => {
         setError('No se han recibido datos del carrito del usuario.');
         setErrorState(false);
       }
-    } catch (error) {
+    } catch (errorApi) {
       console.log(error);
       setErrorState(true);
     }
@@ -72,7 +72,7 @@ const Cart = () => {
         setError('No se han recibido datos del carrito del usuario.');
         setErrorState(false);
       }
-    } catch (error) {
+    } catch (errorApi) {
       setErrorState(true);
     }
   };
@@ -82,7 +82,7 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    let params = new URL(document.location).searchParams;
+    const params = new URL(document.location).searchParams;
     if (params.has('usercart')) {
       getCartActiveUser(id, cartid);
     } else {
@@ -92,7 +92,7 @@ const Cart = () => {
 
   return (
     <div className="cart__parentContainer">
-      {productList.length > 0 ? (
+      {productList.length > 0 && (
         <div className="cart__mainContainer">
           {productList.map((product) => {
             const quantityProduct =
@@ -120,11 +120,14 @@ const Cart = () => {
             onclick={handleCartPurchase}
           />
         </div>
-      ) : cartDetail.status ? (
+      )}
+      {cartDetail.status && (
         <div className="cart__mainContainer">
           <h1>Cart is not created</h1>
         </div>
-      ) : (
+      )}
+
+      {productList.length < 0 && !cartDetail.status && (
         <div className="loaderContainer">
           <LoaderWithRedirect />
         </div>

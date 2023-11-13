@@ -1,20 +1,17 @@
 import React from 'react';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from 'react-router-dom';
+
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
 import { ROUTES } from 'Data/constants';
-import Layout from '../../components/layout/layout.jsx';
+import Layout from 'Components/layout/layout';
 import Home from 'Containers/Home';
 
 import './index.scss';
-import Login from '../../containers/Login/login.jsx';
-import Profile from 'Containers/profile/profile.jsx';
-import Product from 'Containers/product/product.jsx';
-import Cart from 'Containers/cart/cart.jsx';
-import GiftCart from 'Containers/giftcart/giftCart.jsx';
+import Login from 'Containers/Login/login';
+import Profile from 'Containers/profile/profile';
+import Product from 'Containers/product/product';
+import Cart from 'Containers/cart/cart';
+import GiftCart from 'Containers/giftcart/giftCart';
 
 const App = () => (
   <BrowserRouter>

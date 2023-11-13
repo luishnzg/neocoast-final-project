@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import './loader.scss';
 
-const Loader = () => {
-  return <div className="loader"></div>;
-};
+const Loader = () => <div className="loader"></div>;
 
 export default Loader;

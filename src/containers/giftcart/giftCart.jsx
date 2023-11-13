@@ -28,7 +28,7 @@ const GiftCart = () => {
         console.log(error);
       }
       /*----*/
-    } catch (error) {
+    } catch (errorApi) {
       console.log(error);
     }
   };
@@ -42,7 +42,8 @@ const GiftCart = () => {
   }, []);
   return (
     <div className="userCart__parentContainer">
-      {allCartsData && allUserInfo ? (
+      {allCartsData &&
+        allUserInfo &&
         filteredCarts.map((userCart) => {
           const userInformation = allUserInfo.find(
             (user) => user.data.id === userCart.userId,
@@ -81,8 +82,8 @@ const GiftCart = () => {
               )}
             </div>
           );
-        })
-      ) : (
+        })}
+      {!allCartsData && (
         <div className="loaderContainer">
           <Loader />
         </div>
