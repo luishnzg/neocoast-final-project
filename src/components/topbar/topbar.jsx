@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
-import '../topbar/topbar.scss';
 import Button from 'Components/button/button';
 import { Link, NavLink } from 'react-router-dom';
+import './topbar.scss';
 
 const TopBar = () => {
   const [loggedUser, setLoggedUser] = useState('');
   const [displayLoggedView, setDisplayLoggedView] = useState('');
   const isUserLogged = () => {
-    setLoggedUser(localStorage.getItem('userLogged'));
+    setLoggedUser(JSON.parse(localStorage.getItem('userLogged')));
     if (!(loggedUser === null)) {
       setDisplayLoggedView(true);
     } else {
@@ -24,7 +24,7 @@ const TopBar = () => {
   };
   useEffect(() => {
     isUserLogged();
-  }, [loggedUser, displayLoggedView]);
+  }, [displayLoggedView]);
   return (
     <header>
       <nav className="topBar__nav">
@@ -40,7 +40,13 @@ const TopBar = () => {
         </div>
         {displayLoggedView ? (
           <div className="topBar__navBlocks">
-            <p>Send Gift</p>
+            <NavLink
+              to="/giftcart"
+              className={({ isActive, isPending }) =>
+                isPending ? 'pending' : isActive ? 'active' : ''
+              }>
+              Send Gift
+            </NavLink>
             <img
               className="top-bar__image"
               src="https://i.ibb.co/GtL7Tvt/food-cart.png"
@@ -53,6 +59,14 @@ const TopBar = () => {
                   isPending ? 'pending' : isActive ? 'active' : ''
                 }>
                 User Profile
+              </NavLink>
+
+              <NavLink
+                to={`/usercart/${loggedUser.id}/0`}
+                className={({ isActive, isPending }) =>
+                  isPending ? 'pending' : isActive ? 'active' : ''
+                }>
+                Cart
               </NavLink>
             </div>
             <Button

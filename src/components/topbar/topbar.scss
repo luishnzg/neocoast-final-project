@@ -80,6 +80,9 @@ position: relative;
     div {
         margin: 10px;
     }
+    div > a {
+        margin: 5px;
+    }
  }
  .topBar__logoutContainer {
     position: relative;    

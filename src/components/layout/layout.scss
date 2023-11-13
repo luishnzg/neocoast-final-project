@@ -1,0 +1,9 @@
+/* .layout__parentContainer {
+    height: 100vh;
+} */
+
+.layout__parentContainer {
+    background-color:  rgb(250, 244, 235);
+    display: flex;
+    flex-direction: column;
+}

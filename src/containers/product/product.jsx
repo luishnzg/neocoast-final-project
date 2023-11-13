@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import getProductDetail from '../../api/productDetail';
 
 import './product.scss';
+import Loader from 'Components/loader/loader';
 
 const Product = () => {
   const { id } = useParams();
@@ -80,7 +81,9 @@ const Product = () => {
             </div>
           </div>
         ) : (
-          <span> sin info</span>
+          <div className="loaderContainer">
+            <Loader />
+          </div>
         )}
       </div>
     </div>

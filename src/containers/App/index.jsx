@@ -12,24 +12,20 @@ import Home from 'Containers/Home';
 import './index.scss';
 import Login from '../../containers/Login/login.jsx';
 import Profile from 'Containers/profile/profile.jsx';
-import Product from 'Components/product/product.jsx';
+import Product from 'Containers/product/product.jsx';
+import Cart from 'Containers/cart/cart.jsx';
+import GiftCart from 'Containers/giftcart/giftCart.jsx';
 
-/* const BrowserRouter = createBrowserRouter([
-  {
-    element: <Home />,
-    path: ROUTES.home,
-  },
-]); */
-
-/* const App = () => (<RouterProvider router={BrowserRouter} />);
- */
 const App = () => (
   <BrowserRouter>
     <Routes>
       <Route path={ROUTES.home} element={<Layout />}>
         <Route index element={<Home />} />
         <Route path={ROUTES.profile} element={<Profile />} />
-        <Route path="/product/:id" element={<Product />} />
+        <Route path={ROUTES.product} element={<Product />} />
+        <Route path={ROUTES.otherUserCart} element={<Cart />} />
+        <Route path={ROUTES.userCart} element={<Cart />} />
+        <Route path={ROUTES.giftcart} element={<GiftCart />} />
         {/* <Route path={ROUTES.movie} element={<MovieView />} />
         <Route path={ROUTES.favorites} element={<Favorites />} />
         <Route path="*" element={<ErrorPage />} /> */}
