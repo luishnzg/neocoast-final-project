@@ -23,6 +23,7 @@ const TopBar = () => {
   const handleLogOut = () => {
     localStorage.clear();
     setLoggedUser(null);
+    window.location.reload();
   };
   const handleLogIn = () => {
     window.location.replace('/login');

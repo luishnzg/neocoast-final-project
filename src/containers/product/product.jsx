@@ -21,12 +21,17 @@ const Product = () => {
       if (getProductDataDetail) {
         setProductDetail(getProductDataDetail.data);
       } else {
-        setError('No se han recibido datos de los productos.');
+        setError(
+          'There has been an error while retrieving product information',
+        );
       }
     } catch (errorApi) {
       console.log('mensaje de error', error);
-      setError('Hubo un error al cargar los datos de los productos.');
+      setError(
+        'There has been an error while retrieving product information',
+      );
       alert(error);
+      window.location.replace('/');
     }
   };
   useEffect(() => {

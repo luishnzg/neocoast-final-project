@@ -16,7 +16,16 @@ const Cart = () => {
   const [errorState, setErrorState] = useState(false);
   const [error, setError] = useState();
   const [productQuantity, setProductQuantity] = useState([]);
+  const [userIdLogged, setUserIdLogged] = useState();
   const displayLoggedView = isUserLogged();
+  const settingUserID = () => {
+    setUserIdLogged(
+      JSON.parse(localStorage.getItem('userLogged')).id.toString(),
+    );
+    if (userIdLogged === null) {
+      window.location.replace('/');
+    }
+  };
   const getCartActiveUser = async (userId, cartId) => {
     try {
       const getUserCartData = await getUserCart(userId);
@@ -87,7 +96,8 @@ const Cart = () => {
     } else {
       getGiftCartUser(id, cartid);
     }
-  }, [id, errorState, cartid, displayLoggedView]);
+    settingUserID();
+  }, [id, errorState, cartid, displayLoggedView, userIdLogged]);
 
   return (
     <div className="cart__parentContainer">
@@ -112,7 +122,7 @@ const Cart = () => {
               />
             );
           })}
-          {console.log('este es cartdetail', cartDetail)}
+          {console.log('este es cartdetail', displayLoggedView)}
           <Button
             styling="cart__purchaseButton"
             text="Purchase"
