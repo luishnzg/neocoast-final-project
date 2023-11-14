@@ -12,6 +12,7 @@ import Profile from 'Containers/profile/profile';
 import Product from 'Containers/product/product';
 import Cart from 'Containers/cart/cart';
 import GiftCart from 'Containers/giftcart/giftCart';
+import ErrorPage from 'Containers/errorPage/errorPage';
 
 const App = () => (
   <BrowserRouter>
@@ -23,9 +24,8 @@ const App = () => (
         <Route path={ROUTES.otherUserCart} element={<Cart />} />
         <Route path={ROUTES.userCart} element={<Cart />} />
         <Route path={ROUTES.giftcart} element={<GiftCart />} />
-        {/* <Route path={ROUTES.movie} element={<MovieView />} />
-        <Route path={ROUTES.favorites} element={<Favorites />} />
-        <Route path="*" element={<ErrorPage />} /> */}
+
+        <Route path="*" element={<ErrorPage />} />
       </Route>
       <Route path={ROUTES.login} element={<Login />} />
     </Routes>

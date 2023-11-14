@@ -22,11 +22,16 @@ const ProductList = ({ selectedCategory }) => {
       if (getProductData) {
         setProductData(getProductData.data);
       } else {
-        setError('No se han recibido datos de los productos.');
+        setError('Product data has been received');
       }
     } catch (errorApi) {
       console.log(error);
-      setError('Hubo un error al cargar los datos de los productos.');
+      setError(
+        'There has been an error while loading the product data.',
+      );
+      alert(
+        'There has been an error while loading the product data.',
+      );
     }
   };
   useEffect(() => {

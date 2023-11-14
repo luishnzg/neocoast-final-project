@@ -24,8 +24,9 @@ const Product = () => {
         setError('No se han recibido datos de los productos.');
       }
     } catch (errorApi) {
-      console.log(error);
+      console.log('mensaje de error', error);
       setError('Hubo un error al cargar los datos de los productos.');
+      alert(error);
     }
   };
   useEffect(() => {

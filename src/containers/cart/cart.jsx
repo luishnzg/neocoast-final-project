@@ -6,6 +6,7 @@ import './cart.scss';
 import Button from 'Components/button/button';
 import LoaderWithRedirect from 'Components/loader/loaderRedirect';
 import getUserCart from '../../api/userCart';
+import { isUserLogged } from '../../utils/userLogged';
 
 const Cart = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const Cart = () => {
   const [errorState, setErrorState] = useState(false);
   const [error, setError] = useState();
   const [productQuantity, setProductQuantity] = useState([]);
-
+  const displayLoggedView = isUserLogged();
   const getCartActiveUser = async (userId, cartId) => {
     try {
       const getUserCartData = await getUserCart(userId);
@@ -32,28 +33,25 @@ const Cart = () => {
         Promise.all(cart).then((data) => {
           setProductList(data);
           setErrorState(false);
-          console.log('el carrito con fetch', cart);
         });
       } else {
-        setError('No se han recibido datos del carrito del usuario.');
+        setError('Cart data has not been received');
         setErrorState(false);
       }
     } catch (errorApi) {
       console.log(error);
       setErrorState(true);
+      alert(
+        'There has been an error while trying to retrieve the cart data',
+      );
     }
   };
   const getGiftCartUser = async (userId, cartId) => {
     try {
       const getUserCartData = await getUserCart(userId);
-      console.log(
-        'imprimido desde el getgiftcaruser, es el gifcartuserdata',
-        getUserCartData.data,
-      );
       if (getUserCartData.data) {
-        console.log('lo encontro bien');
         const foundOtherUserCart = getUserCartData.data.find(
-          (cart) => cart.id === cartId || 'no se encontro',
+          (cart) => cart.id === cartId || 'not found',
         );
         setCartDetail(foundOtherUserCart);
         setProductQuantity(foundOtherUserCart.products);
@@ -66,14 +64,15 @@ const Cart = () => {
         Promise.all(cart).then((data) => {
           setProductList(data);
           setErrorState(false);
-          console.log('el carrito con fetch', cart);
         });
       } else {
-        setError('No se han recibido datos del carrito del usuario.');
+        setError('Cart data has not been retrieved');
         setErrorState(false);
       }
     } catch (errorApi) {
       setErrorState(true);
+      alert('Cart data has not been retrieved');
+      window.location.replace('/');
     }
   };
   const handleCartPurchase = () => {
@@ -88,11 +87,11 @@ const Cart = () => {
     } else {
       getGiftCartUser(id, cartid);
     }
-  }, [id, errorState, cartid]);
+  }, [id, errorState, cartid, displayLoggedView]);
 
   return (
     <div className="cart__parentContainer">
-      {productList.length > 0 && (
+      {displayLoggedView && productList.length > 0 && (
         <div className="cart__mainContainer">
           {productList.map((product) => {
             const quantityProduct =
@@ -127,11 +126,12 @@ const Cart = () => {
         </div>
       )}
 
-      {productList.length < 0 && !cartDetail.status && (
+      {productList.length === 0 && !cartDetail.status && (
         <div className="loaderContainer">
           <LoaderWithRedirect />
         </div>
       )}
+      {!displayLoggedView && window.location.replace('/')}
     </div>
   );
 };

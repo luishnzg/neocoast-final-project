@@ -3,18 +3,23 @@ import React, { useEffect, useState } from 'react';
 import Button from 'Components/button/button';
 import { Link } from 'react-router-dom';
 import './topbar.scss';
+import { isUserLogged } from '../../utils/userLogged';
 
 const TopBar = () => {
   const [loggedUser, setLoggedUser] = useState('');
-  const [displayLoggedView, setDisplayLoggedView] = useState('');
-  const isUserLogged = () => {
+  const settingUserID = () => {
+    setLoggedUser(JSON.parse(localStorage.getItem('userLogged')));
+  };
+  /* const [displayLoggedView, setDisplayLoggedView] = useState(''); */
+  /*  const isUserLogged = () => {
     setLoggedUser(JSON.parse(localStorage.getItem('userLogged')));
     if (!(loggedUser === null)) {
       setDisplayLoggedView(true);
     } else {
       setDisplayLoggedView(false);
     }
-  };
+  }; */
+  const displayLoggedView = isUserLogged();
   const handleLogOut = () => {
     localStorage.clear();
     setLoggedUser(null);
@@ -23,7 +28,7 @@ const TopBar = () => {
     window.location.replace('/login');
   };
   useEffect(() => {
-    isUserLogged();
+    settingUserID();
   }, [displayLoggedView]);
   return (
     <header>
@@ -43,15 +48,6 @@ const TopBar = () => {
             <Link to="/giftcart" className="topBar__linkNav">
               Send Gift
             </Link>
-            {/*   <Link
-              to={`/usercart/${loggedUser.id}/0`}
-              className='topBar__linkNav'>
-              <img
-                className="top-bar__image"
-                src="https://i.ibb.co/GtL7Tvt/food-cart.png"
-                alt="cart"></img>
-            </Link>
- */}
             <Link
               to={`/usercart/${loggedUser && loggedUser.id}/0`}
               className="topBar__linkNav">

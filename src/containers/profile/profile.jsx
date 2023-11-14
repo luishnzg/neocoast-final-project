@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Loader from 'Components/loader/loader';
 import getUserInfo from '../../api/users';
 import './profile.scss';
+import { isUserLogged } from '../../utils/userLogged';
 
 const Profile = () => {
   const [userId, setUserId] = useState();
   const [loggedView, setLoggedView] = useState('');
   const [error, setError] = useState('');
   const [userData, setUserData] = useState({});
+  const displayLoggedView = isUserLogged();
   const getUser = async (id) => {
     try {
       const getUserData = await getUserInfo(id);
@@ -23,7 +25,7 @@ const Profile = () => {
       setError('Hubo un error al cargar los datos del usuario.');
     }
   };
-  const isUserLogged = () => {
+  const settingUserID = () => {
     setUserId(
       JSON.parse(localStorage.getItem('userLogged')).id.toString(),
     );
@@ -36,12 +38,12 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    isUserLogged();
+    settingUserID();
     getUser(userId);
-  }, [loggedView, userId]);
+  }, [displayLoggedView, userId]);
   return (
     <div className="userData__parentContainer">
-      {userData.name ? (
+      {displayLoggedView && userData.name ? (
         <div className="userData__container">
           <h1 className="userData__title">User Profile</h1>
           <div>
@@ -51,6 +53,7 @@ const Profile = () => {
               'userdata imprimido en el first name',
               userData,
             )}
+            {console.log('loggedview', displayLoggedView)}
           </div>
           <div>
             <label htmlFor="name">Last Name</label>
@@ -90,6 +93,7 @@ const Profile = () => {
           <Loader />
         </div>
       )}
+      {!displayLoggedView && window.location.replace('/')}
     </div>
   );
 };

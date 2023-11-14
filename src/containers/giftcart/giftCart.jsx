@@ -6,12 +6,14 @@ import Loader from 'Components/loader/loader';
 import getAllCarts from '../../api/carts';
 import getUserInfo from '../../api/users';
 import './giftCart.scss';
+import { isUserLogged } from '../../utils/userLogged';
 
 const GiftCart = () => {
   const [allCartsData, setAllCartsData] = useState([]);
   const [allUserInfo, setAllUserInfo] = useState([]);
   const [error, setError] = useState();
   const [userLogged, setUserLogged] = useState();
+  const displayLoggedView = isUserLogged();
   const getCarts = async () => {
     try {
       const getAllCartsData = await getAllCarts();
@@ -24,12 +26,15 @@ const GiftCart = () => {
           setAllUserInfo(data);
         });
       } else {
-        setError('No se han recibido datos del carrito del usuario.');
+        setError('No carts data has been received.');
         console.log(error);
       }
       /*----*/
     } catch (errorApi) {
       console.log(error);
+      alert(
+        'There has been an error while retrieving the Gift carts data.',
+      );
     }
   };
   const filteredCarts = allCartsData.filter(
@@ -39,11 +44,12 @@ const GiftCart = () => {
   useEffect(() => {
     getCarts();
     setUserLogged(JSON.parse(localStorage.getItem('userLogged')));
-  }, []);
+  }, [displayLoggedView]);
   return (
     <div className="userCart__parentContainer">
-      {allCartsData &&
+      {displayLoggedView &&
         allUserInfo &&
+        allCartsData &&
         filteredCarts.map((userCart) => {
           const userInformation = allUserInfo.find(
             (user) => user.data.id === userCart.userId,
@@ -83,11 +89,12 @@ const GiftCart = () => {
             </div>
           );
         })}
-      {!allCartsData && (
+      {displayLoggedView && !allCartsData && (
         <div className="loaderContainer">
           <Loader />
         </div>
       )}
+      {!displayLoggedView && window.location.replace('/')}
     </div>
   );
 };

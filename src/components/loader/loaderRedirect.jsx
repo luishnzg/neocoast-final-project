@@ -7,7 +7,7 @@ const LoaderWithRedirect = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      alert('There has been an error while updating the cart page.');
+      alert('There has been an error while updating the page');
       navigate('/');
     }, 15000); // 15 segundos
 
